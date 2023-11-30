@@ -1,0 +1,5 @@
+{
+    "airfoils" :  ["RAE_2822_130_pts.txt"],
+    "alpha[deg]" :  2.81,
+    "freestream_velocity" :  10.0
+}
