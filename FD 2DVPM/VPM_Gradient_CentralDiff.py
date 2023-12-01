@@ -240,9 +240,11 @@ if __name__ == "__main__":
     
     # set step size
     h = .000000769
+    #h = 0.00000001
+
     # get number of design points from
     i = 0
-    airfoil1 = StepSolve("2412_200.json", i, h) 
+    airfoil1 = StepSolve("2412_10.json", i, h) 
     n = airfoil1.get_airfoil_points() 
 
     # take start time
@@ -255,7 +257,7 @@ if __name__ == "__main__":
 
     for i in range(0, 2*n):
         # calculate the grad (the gradient for a single design variable) and append it to the list
-        gradient.append((StepSolve("2412_200.json", i, h).run()- StepSolve("2412_200.json", i, -h).run())/(2*h)) 
+        gradient.append((StepSolve("2412_10.json", i, h).run()- StepSolve("2412_10.json", i, -h).run())/(2*h)) 
         print("done with grad ", i)
     # initalize empty list
     labels = []
