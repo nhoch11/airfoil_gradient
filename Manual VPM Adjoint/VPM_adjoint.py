@@ -149,7 +149,7 @@ if __name__ == "__main__":
     tstart = time.time()
 
     # create an Adjoint object of the input airfoil
-    gradient1 = Adjoint("0012_26.json")
+    gradient1 = Adjoint("Manual VPM Adjoint/2412_10.json")
 
     # run the program
     gradient1.run()
