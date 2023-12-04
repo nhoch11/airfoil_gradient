@@ -40,16 +40,35 @@ with open(X0_txt, "w") as output_file:
 adjoint_X0 = Adjoint("airfoil_adjoint/2412_50_adjoint.json")
 adjoint_X0.run()
 grad_X0 = adjoint_X0.gradient
-# store the data
+grad_table = adjoint_X0.gradient_table
+# store the data for gradient of shape X0
 gradient_txt = "airfoil_adjoint/gradient.txt"
 with open(gradient_txt, "w") as output_file:
     for x in grad_X0:
-        output_file.write(f"{x}\n")
+        output_file.write(grad_table)
 
+
+# feed in X0 points and gradient into the loop
+grad = grad_X0
+X_shape = X0
+
+
+# set up loop stop conditions
+max_iter = 10
+e = 0.001
+iter = 0
+difference = 1
 
 # do a loop while difference between gradients is greater than say .001, or just do a number of iterations
-
+while iter <= max_iter or difference >= e:
+    # trim the gradient vector
+    
     # calculate the direction P
+    grad_norm = np.linalg.norm(grad)
+    print("norm\n",grad_norm)
+    p = grad/grad_norm
+    print("p direction\n",p)
+    break
 
     # approximate the Hessian
         # perturb X in the P direction by arbitrary alpha_bar step of 0.00001

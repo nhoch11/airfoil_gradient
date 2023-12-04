@@ -133,7 +133,8 @@ class Adjoint:
             labels.append("y"+ str(i))
 
         # tabulate data, headers = "keys" displays the lists in column form
-        print("\n", tabulate({"design variable": labels , "CL gradient": self.gradient.transpose()}, floatfmt=".14f",headers = "keys", stralign = "right"), "\n")
+        self.gradient_table = tabulate({"design variable": labels , "CL gradient": self.gradient.transpose()}, floatfmt=".14f",headers = "keys", stralign = "right")
+        print("\n", self.gradient_table, "\n")
         
 
     def run(self):
