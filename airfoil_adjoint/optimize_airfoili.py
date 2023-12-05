@@ -61,20 +61,38 @@ difference = 1
 
 # do a loop while difference between gradients is greater than say .001, or just do a number of iterations
 while iter <= max_iter or difference >= e:
-    # trim the gradient vector
+    # trim the gradient vector,  remove trailing edge and some leading edge gradient values
+    rows = grad_table.split('\n')
+    data = [row.split() for row in rows]
+    table = [list(map(str.strip, row)) for row in data] 
+    rows_to_delete = set([2,3,4, 49,50,51, 52,53,54,55,56, 95,96,97,98,99,100,101])
+    table = [element for index, element in enumerate(table) if index not in rows_to_delete]
+    grad = np.delete(grad, [0,1,2, 47,48,49, 50,51,52,53,54, 93,94,95,96,97,98,99], 1)
     
     # calculate the direction P
     grad_norm = np.linalg.norm(grad)
     print("norm\n",grad_norm)
     p = grad/grad_norm
     print("p direction\n",p)
-    break
+    
 
     # approximate the Hessian
-        # perturb X in the P direction by arbitrary alpha_bar step of 0.00001
-        # use forward diff
+    # perturb X in the P direction by arbitrary alpha_bar step of 0.000001
+    X_perturbed = X_shape + 0.00001*p
+    # write to a txt file
+    X_perturb_txt = "airfoil_adjoint/X_perturbed.txt"
+    with open(X_perturb_txt, "w") as output_file:
+        for x, y in X_perturbed:
+            output_file.write(f"{x} {y} \n")
+    adjoint_h = Adjoint("airfoil_adjoint/X_perturbed.json")
+    adjoint_h.run()
+    grad_h = adjoint_h.gradient
+    grad_h = np.delete(grad_h, [0,1,2, 47,48,49, 50,51,52,53,54, 93,94,95,96,97,98,99], 1)
+    # use forward diff
+    hessianp = (grad_h - grad)/0.00001
     
     # calc the step size alpha
+    alpha = np.dot(grad, hessianp)/(p*np.dot(grad,hessianp))
 
     # step the geometry 
         # Xnew = X + alpha*P
@@ -82,7 +100,7 @@ while iter <= max_iter or difference >= e:
     # calculate the gradient for this new step and compare to the existing gradient
 
     # store or print results
-
+    break
     # stop if the gradient difference is close to zero 
 
 

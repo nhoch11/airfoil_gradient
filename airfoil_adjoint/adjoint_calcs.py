@@ -41,6 +41,7 @@ class adjoint_calcs:
             
         # store number of points as self.n
         self.n = len(self.mypoints)
+        print(self.n)
         # split the airfoil points and make X_a vector of x coords then y coords
         self.x_vals = self.mypoints[:,0]
         self.y_vals = self.mypoints[:,1]
