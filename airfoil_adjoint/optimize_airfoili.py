@@ -65,6 +65,7 @@ while iter <= max_iter or difference >= e:
     rows = grad_table.split('\n')
     data = [row.split() for row in rows]
     table = [list(map(str.strip, row)) for row in data] 
+    # change to zeros, dont delete
     rows_to_delete = set([2,3,4, 49,50,51, 52,53,54,55,56, 95,96,97,98,99,100,101])
     table = [element for index, element in enumerate(table) if index not in rows_to_delete]
     grad = np.delete(grad, [0,1,2, 47,48,49, 50,51,52,53,54, 93,94,95,96,97,98,99], 1)
@@ -78,7 +79,8 @@ while iter <= max_iter or difference >= e:
 
     # approximate the Hessian
     # perturb X in the P direction by arbitrary alpha_bar step of 0.000001
-    X_perturbed = X_shape + 0.00001*p
+    for i in range(p/2):
+        X_perturbed(0,i) = X_shape + 0.00001*p
     # write to a txt file
     X_perturb_txt = "airfoil_adjoint/X_perturbed.txt"
     with open(X_perturb_txt, "w") as output_file:
