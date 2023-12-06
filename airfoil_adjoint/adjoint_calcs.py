@@ -41,7 +41,7 @@ class adjoint_calcs:
             
         # store number of points as self.n
         self.n = len(self.mypoints)
-        print(self.n)
+        print("Airfoil has "+str(self.n)+" points")
         # split the airfoil points and make X_a vector of x coords then y coords
         self.x_vals = self.mypoints[:,0]
         self.y_vals = self.mypoints[:,1]
@@ -408,7 +408,7 @@ class adjoint_calcs:
         
     def run(self):
         print("-"*40)
-        print("Start Primal")
+        print("Start Adjoint Gradient Calculation")
         self.get_airfoil_points()
         self.get_Control_Points()
         self.get_alpha_and_Vinf()
