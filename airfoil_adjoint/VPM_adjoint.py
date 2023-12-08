@@ -31,6 +31,7 @@ class Adjoint:
         self.dA = calcs[7]
         self.dB = calcs[8]
         self.partial_CL = calcs[9] 
+        self.CL = calcs[10]
         
 
     # calculate g, then g transpose
@@ -134,7 +135,10 @@ class Adjoint:
 
         # tabulate data, headers = "keys" displays the lists in column form
         self.gradient_table = tabulate({"design_variable": labels , "CL_gradient": self.gradient.transpose()}, floatfmt=".14f",headers = "keys", stralign = "right")
-        print("\n", self.gradient_table, "\n")
+        #print("\n", self.gradient_table, "\n")
+    
+    def get_CL(self):
+        return self.CL
         
 
     def run(self):

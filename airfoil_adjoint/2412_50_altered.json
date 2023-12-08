@@ -1,0 +1,5 @@
+{
+    "airfoils" :  ["airfoil_adjoint/2412_50_pts_altered.txt"],
+    "alpha[deg]" :  0,
+    "freestream_velocity" :  10.0
+}

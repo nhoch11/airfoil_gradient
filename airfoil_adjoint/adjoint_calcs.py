@@ -438,7 +438,7 @@ class adjoint_calcs:
         print("-"*40)
         
         # some of these returned values were used when checking the code against finite difference
-        return self.A, self.B, self.mypoints, self.n, self.l_k, self.Vinf, self.gamma, self.dA, self.dB, self.partial_CL
+        return self.A, self.B, self.mypoints, self.n, self.l_k, self.Vinf, self.gamma, self.dA, self.dB, self.partial_CL, self.CL
 
 
 if __name__ == "__main__":
